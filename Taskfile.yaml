@@ -20,6 +20,7 @@ tasks:
 
   check:all:
     cmds:
+      - task: check:asdf
       - task: check:fish
       - task: check:starship
       - task: check:fuck
@@ -39,6 +40,9 @@ tasks:
       - task: check:exa
       - task: check:zoxide
 
+  check:asdf:
+    <<: *check
+    vars: { TOOL: asdf }
   check:fish:
     <<: *check
     vars: { TOOL: fish }
