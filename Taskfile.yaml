@@ -72,7 +72,7 @@ tasks:
     vars: { TOOL: tig }
   check:delta:
     <<: *check
-    vars: { TOOL: delta }
+    vars: { TOOL: delta, PACKAGE: delta or git-delta }
   check:tldr:
     <<: *check
     vars: { TOOL: tldr, PACKAGE: tealdeer }
