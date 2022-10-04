@@ -1,0 +1,77 @@
+[user]
+	name = Rafał Kamiński
+	email = r.kaminski008@gmail.com
+
+[push]
+    default = current
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[rebase]
+    autoStash = true
+
+[merge]
+    tool = meld
+    autoStash = true
+    conflictstyle = diff3
+
+[alias]
+    a = add
+    g = grep
+    ap = add -p
+    co = checkout
+    cob = checkout -b
+    ci = commit
+    cl = clone
+    cp = cherry-pick
+    s = status -sb
+    st = status
+    ba = branch -a
+    b = branch
+    bd = branch -d
+    f = fetch -p
+    d = diff
+    p = push
+    pf = push --force-with-lease
+    rc = rebase --continue
+    ra = rebase --abort
+    r = rebase
+    up = "!git fetch && git rebase origin/master"
+    c = commit
+    signoff-rebase = "!GIT_SEQUENCE_EDITOR='sed -i -re s/^pick/e/' sh -c 'git rebase -i $1 && while git rebase --continue; do git commit --amend --signoff --no-edit; done' -"
+    bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
+  cleanup = "!COMMAND=\"git branch -D\"; while [[ $# -gt 0 ]]; do case \"$1\" in -d|--dryrun) COMMAND=\"echo\"; shift; ;; *) MAIN_BRANCH=\"$1\"; shift;; esac; done; MAIN_BRANCH=\"${MAIN_BRANCH:-$(git symbolic-ref refs/remotes/origin/HEAD)}\"; git for-each-ref --merged=\"$MAIN_BRANCH\" --no-contains=\"$MAIN_BRANCH\" --format=\"%(refname:short)\" refs/heads/ | xargs -n1 -r $COMMAND;#"
+
+[core]
+  	editor = vim
+	pager = delta
+
+[color]
+    ui = auto
+
+[init]
+	defaultBranch = master
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[diff]
+	colorMoved = default
+
+[interactive]
+    diffFilter = delta --color-only
+	
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+    navigate = true
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none

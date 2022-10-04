@@ -1,0 +1,113 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - echo "" && echo "Checking tools:"
+      - task: check:all
+      - echo "" && echo "Notes:"
+      - task: prompt:all
+    silent: true
+
+  check:command: &check
+    cmds:
+      - echo "Install {{.TOOL | default "ERROR"}} command, with official name {{.PACKAGE | default .TOOL }}"
+    status:
+      - command -v {{.TOOL}}
+    silent: true
+
+  check:all:
+    cmds:
+      - task: check:fish
+      - task: check:starship
+      - task: check:fuck
+      - task: check:bat
+      - task: check:hyperfine
+      - task: check:ncdu
+      - task: check:dfrs
+      - task: check:tig
+      - task: check:delta
+      - task: check:tldr
+      - task: check:ipcalc
+      - task: check:entr
+      - task: check:jq
+      - task: check:fx
+      - task: check:ag
+      - task: check:fzf
+      - task: check:exa
+      - task: check:zoxide
+
+  check:fish:
+    <<: *check
+    vars: { TOOL: fish }
+  check:fisher:
+    <<: *check
+    vars: { TOOL: fisher }
+  check:starship:
+    <<: *check
+    vars: { TOOL: starship }
+  check:fuck:
+    <<: *check
+    vars: { TOOL: fuck, PACKAGE: thefuck }
+  check:bat:
+    <<: *check
+    vars: { TOOL: bat }
+  check:hyperfine:
+    <<: *check
+    vars: { TOOL: hyperfine }
+  check:ncdu:
+    <<: *check
+    vars: { TOOL: ncdu }
+  check:dfrs:
+    <<: *check
+    vars: { TOOL: dfrs }
+  check:tig:
+    <<: *check
+    vars: { TOOL: tig }
+  check:delta:
+    <<: *check
+    vars: { TOOL: delta }
+  check:tldr:
+    <<: *check
+    vars: { TOOL: tldr, PACKAGE: tealdeer }
+  check:ipcalc:
+    <<: *check
+    vars: { TOOL: ipcalc }
+  check:entr:
+    <<: *check
+    vars: { TOOL: entr }
+  check:jq:
+    <<: *check
+    vars: { TOOL: jq }
+  check:fx:
+    <<: *check
+    vars: { TOOL: fx }
+  check:ag:
+    <<: *check
+    vars: { TOOL: ag, PACKAGE: the_silver_searcher }
+  check:fzf:
+    <<: *check
+    vars: { TOOL: fzf }
+  check:exa:
+    <<: *check
+    vars: { TOOL: exa }
+  check:zoxide:
+    <<: *check
+    vars: { TOOL: zoxide }
+
+
+
+  prompt:command: &prompt
+    cmds:
+      - echo "Setup {{.TOOL}}"
+    silent: true
+
+  prompt:all:
+    cmds:
+      - task: prompt:fisher-fzf
+
+  prompt:fisher-fzf:
+    <<: *prompt
+    vars: { TOOL: jethrokuan/fzf fish plugin with fisher }
